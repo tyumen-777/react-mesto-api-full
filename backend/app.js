@@ -17,8 +17,9 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const app = express();
 
 const allowedCors = [
-  'http://tyumen-777.nomoredomains.club/',
-  'http://localhost:3000',
+  'https://tyumen-777.nomoredomains.club/',
+  'https://localhost:3000',
+  'https://api.tyumen-777.nomoredomains.monster',
 ];
 
 app.use(cors({
