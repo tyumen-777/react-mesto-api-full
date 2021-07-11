@@ -76,7 +76,7 @@ app.use(auth);
 
 app.use('/', usersRoutes);
 app.use('/', cardRoutes);
-app.all('*', () => {
+app.use('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
@@ -99,5 +99,6 @@ app.use((err, req, res, next) => {
 app.use(errors());
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });
