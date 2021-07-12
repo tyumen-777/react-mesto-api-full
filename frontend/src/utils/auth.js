@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.tyumen-777.nomoredomains.monster';
 
 //const checkResponse = (response) => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
 
@@ -32,6 +32,7 @@ export const authorize = ({email, password}) => {
         .then((data) => {
             if (data.token) {
                 localStorage.setItem('jwt', data.token);
+
                 return data.token
             }
         })

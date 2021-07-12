@@ -91,7 +91,7 @@ class Api {
 const api = new Api({
     address: 'https://api.tyumen-777.nomoredomains.monster',
     headers: {
-        'Authorization': `${localStorage.getItem('jwt')}`,
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-type': 'application/json'
     }
 })

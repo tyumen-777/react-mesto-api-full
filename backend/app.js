@@ -17,7 +17,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const app = express();
 
 const allowedCors = [
-  'https://tyumen-777.nomoredomains.club/',
+  'https://tyumen-777.nomoredomains.club',
   'https://localhost:3000',
   'https://api.tyumen-777.nomoredomains.monster',
 ];
@@ -34,7 +34,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+  if (req.method === 'OPTIONS') {
+    res.send(200);
+  }
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
