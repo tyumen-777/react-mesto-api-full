@@ -8,6 +8,18 @@ const ConflictError = require('../errors/conflict-error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+const getCurrentUser = (req, res, next) => {
+  const id = req.user._id;
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Нет пользователя с таким id');
+      }
+      return res.status(200).send({ data: user });
+    })
+    .catch(next);
+};
+
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
@@ -101,6 +113,7 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
+  getCurrentUser,
   getUsers,
   getUserById,
   createUser,
