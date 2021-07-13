@@ -18,8 +18,8 @@ const app = express();
 
 const allowedCors = [
   'https://tyumen-777.nomoredomains.club',
-  'https://localhost:3000',
   'https://api.tyumen-777.nomoredomains.monster',
+  'https://localhost:3000',
 ];
 
 app.use(cors({
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   if (req.method === 'OPTIONS') {
-    res.send(200);
+    res.status(200).send;
   }
   next();
 });
