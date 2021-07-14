@@ -40,8 +40,9 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   if (req.method === 'OPTIONS') {
     res.status(200).send();
+  } else {
+    next();
   }
-  next();
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
