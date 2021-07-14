@@ -5,12 +5,30 @@ const NotAuthError = require('../errors/not-auth-error');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const ConflictError = require('../errors/conflict-error');
+const isAuthorized = require('../helpers/isAuthorized');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+// const getCurrentUser = (req, res, next) => {
+//
+//   const id = req.user._id;
+//   User.findById(id)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Нет пользователя с таким id');
+//       }
+//       return res.status(200).send({ data: user });
+//     })
+//     .catch(next);
+// };
 const getCurrentUser = (req, res, next) => {
-  const id = req.user._id;
-  User.findById(id)
+  const token = req.headers.authorization;
+
+  if (!isAuthorized(token)) {
+    throw new NotFoundError('Доступ запрещен');
+  }
+
+  return User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
