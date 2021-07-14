@@ -35,13 +35,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 app.use((req, res, next) => {
-  const { origin } = req.headers;
-  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   if (req.method === 'OPTIONS') {
     (res.status(200).send());
-    console.log(res);
     return;
   }
   next();
