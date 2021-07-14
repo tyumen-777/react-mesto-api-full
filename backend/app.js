@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', '*');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   if (req.method === 'OPTIONS') {
-    res.status(200).send;
+    res.send(200);
   }
   next();
 });
@@ -99,9 +99,12 @@ app.use((err, req, res, next) => {
     });
   } else {
     res.status(statusCode).send({
-      message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка'
+        : message,
     });
   }
+  next();
 });
 
 app.use(errors());
