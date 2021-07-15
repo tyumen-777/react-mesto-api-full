@@ -23,7 +23,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 // };
 const getCurrentUser = (req, res, next) => {
   const token = req.headers.authorization;
-
+  console.log(req.user._id);
   if (!isAuthorized(token)) {
     throw new NotFoundError('Доступ запрещен');
   }
