@@ -23,6 +23,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 // };
 const getCurrentUser = (req, res, next) => {
   const token = req.headers.authorization;
+  console.log(req.user._id);
   if (!isAuthorized(token)) {
     throw new NotFoundError('Доступ запрещен');
   }
@@ -46,7 +47,7 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
