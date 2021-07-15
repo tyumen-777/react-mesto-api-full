@@ -11,9 +11,12 @@ class Api {
     }).then(this._checkResponse)
   } // Получаем массив карточек с сервера
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._address}/users/me`, {
-      headers: this._headers
+      method: 'GET',
+      headers: {
+        ...this._headers,
+      Authorization: `Bearer ${token}`}
     }).then(this._checkResponse)
   } // Получаем информацию о пользователе с сервера
 
