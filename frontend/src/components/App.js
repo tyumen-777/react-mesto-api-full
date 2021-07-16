@@ -40,8 +40,7 @@ function App() {
     const [token ,setToken] = React.useState('')
 
     React.useEffect(() => {
-      const token = localStorage.getItem('jwt')
-        api.getInitialCards(token)
+        api.getInitialCards()
             .then(cardList => {
                 setCards(cardList);
             })
