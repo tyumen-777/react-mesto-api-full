@@ -16,7 +16,7 @@ class Api {
     }).then(this._checkResponse)
   } // Получаем информацию о пользователе с сервера
 
-  editUserInfo(name, about) {
+  editUserInfo({ name, about }) {
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -27,7 +27,7 @@ class Api {
     }).then(this._checkResponse)
   }
 
-  addCard(name, link) {
+  addCard({ name, link }) {
     return fetch(`${this._address}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -38,7 +38,7 @@ class Api {
     }).then(this._checkResponse)
   }
 
-  editUserAvatar(url) {
+  editUserAvatar({ url }) {
     console.log(url)
     return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
