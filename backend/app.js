@@ -18,7 +18,7 @@ const app = express();
 
 const allowedCors = [
   'https://api.tyumen-777.nomoredomains.monster',
-  'https://tyumen-777.nomoredomains.club/',
+  'https://tyumen-777.nomoredomains.club',
   'https://localhost:3000',
 ];
 
