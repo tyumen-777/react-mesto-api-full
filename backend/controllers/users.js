@@ -9,18 +9,6 @@ const isAuthorized = require('../helpers/isAuthorized');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// const getCurrentUser = (req, res, next) => {
-//
-//   const id = req.user._id;
-//   User.findById(id)
-//     .then((user) => {
-//       if (!user) {
-//         throw new NotFoundError('Нет пользователя с таким id');
-//       }
-//       return res.status(200).send({ data: user });
-//     })
-//     .catch(next);
-// };
 const getCurrentUser = (req, res, next) => {
   const token = req.headers.authorization;
 
