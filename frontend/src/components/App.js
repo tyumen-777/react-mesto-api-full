@@ -37,7 +37,6 @@ function App() {
     const history = useHistory();
 
     const [cards, setCards] = React.useState([]);
-    const [token ,setToken] = React.useState('')
 
     React.useEffect(() => {
         api.getInitialCards()
@@ -52,7 +51,7 @@ function App() {
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-        api.changeLikeCardStatus(card._id, isLiked, token)
+        api.changeLikeCardStatus(card._id, isLiked)
             .then((newCard) => {
                 //const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard)
                 //setCards(newCards)
@@ -65,7 +64,7 @@ function App() {
     }
 
     function handleCardDelete(card) {
-        api.removeCard(card._id, token)
+        api.removeCard(card._id)
             .then(() => {
                 const newCards = cards.filter((elem) => elem !== card);
                 setCards(newCards);
@@ -137,7 +136,7 @@ function App() {
     }
 
     function handleUpdateAvatar({avatar}) {
-        api.editUserAvatar(avatar, token)
+        api.editUserAvatar(avatar)
             .then((data) => {
                 setCurrentUser(data);
                 closeAllPopups();
@@ -148,7 +147,7 @@ function App() {
     }
 
     function handleAddPlaceSubmit({name, link}) {
-        api.addCard(name, link, token)
+        api.addCard(name, link)
             .then((data) => {
                 setCards([data, ...cards]);
                 closeAllPopups()
@@ -170,7 +169,6 @@ function App() {
         setLoggedIn(false);
         localStorage.removeItem('jwt');
         setEmail('')
-        setToken('')
         history.push('/sign-in')
     }
 
@@ -216,7 +214,6 @@ function App() {
                 setLoggedIn(true);
                 handleInfoTooltipContent({iconPath: registrationOk, text: 'Вы успешны авторизованы!'});
                 handleInfoTooltipOpen();
-                setToken(data.token)
                 setTimeout(history.push, 3000, '/');
                 setTimeout(closeAllPopups, 2500);
             }).catch((err) => {

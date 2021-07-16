@@ -1,6 +1,7 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -16,9 +17,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const app = express();
 
 const allowedCors = [
-  'https://tyumen-777.nomoredomains.club',
-  'https://api.tyumen-777.nomoredomains.monster',
-  'https://localhost:3000',
+  'http://tyumen-777.nomoredomains.club/',
+  'http://localhost:3000',
 ];
 
 app.use(cors({
@@ -33,52 +33,43 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  if (req.method === 'OPTIONS') {
-    res.status(200).send();
-    return;
-  }
-  next();
-});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
-
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадет');
-  }, 0);
-});
 
 app.post(
   '/signin',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
-      password: Joi.string().required(),
+      password: Joi.string().required().min(8).max(30),
     }),
   }),
   login,
 );
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(8).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string(),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
+app.post(
+  '/signup',
+  celebrate({
+    body: Joi.object().keys({
+      email: Joi.string().required().email(),
+      password: Joi.string().required()
+        .pattern(new RegExp('^[A-Za-z0-9]{8,30}$')),
+      name: Joi.string().min(2).max(30),
+      about: Joi.string().min(2).max(30),
+      avatar: Joi.string()
+        .regex(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/),
+    }),
   }),
-}), createUser);
+  createUser,
+);
 
 app.use(auth);
 
-app.use('/users', usersRoutes);
+app.use('/', usersRoutes);
 app.use('/', cardRoutes);
-app.use('*', () => {
+app.all('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
@@ -93,17 +84,13 @@ app.use((err, req, res, next) => {
     });
   } else {
     res.status(statusCode).send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
+      message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
     });
   }
-  next();
 });
 
 app.use(errors());
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
 });
