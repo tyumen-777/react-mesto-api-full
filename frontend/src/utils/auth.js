@@ -9,7 +9,7 @@ const checkResponse = (res) => {
     return res.json();
 }
 
-export const register = (email, password) => {
+export const register = ({ email, password }) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         headers: {
