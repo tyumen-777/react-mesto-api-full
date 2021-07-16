@@ -89,7 +89,7 @@ class Api {
 
 
 const api = new Api({
-    address: 'https://mesto.nomoreparties.co/v1/cohort-22',
+    address: 'https://api.tyumen-777.nomoredomains.monster',
     headers: {
         authorization: 'ed089852-ab21-42a0-b909-11eeabdb931a',
         'Content-type': 'application/json'
