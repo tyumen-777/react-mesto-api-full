@@ -59,30 +59,24 @@ app.post(
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
-      password: Joi.string().required().min(8).max(30),
+      password: Joi.string().required(),
     }),
   }),
   login,
 );
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required()
-        .pattern(new RegExp('^[A-Za-z0-9]{8,30}$')),
-      name: Joi.string().min(2).max(30),
-      about: Joi.string().min(2).max(30),
-      avatar: Joi.string()
-        .regex(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/),
-    }),
+app.post('/signup', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(8).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string(),
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
   }),
-  createUser,
-);
+}), createUser);
 
 app.use(auth);
 
-app.use('/', usersRoutes);
+app.use('/users', usersRoutes);
 app.use('/', cardRoutes);
 app.use('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
