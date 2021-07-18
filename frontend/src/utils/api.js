@@ -101,4 +101,7 @@ const api = new Api({
         'Content-type': 'application/json',
     }
 })
+
+console.log(`${localStorage.getItem('jwt')}`);
+
 export default api
