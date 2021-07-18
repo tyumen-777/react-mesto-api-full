@@ -50,17 +50,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
-
-app.post(
-  '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required().min(8).max(30),
-    }),
-  }),
-  login,
-);
 app.post(
   '/signup',
   celebrate({
@@ -76,16 +65,24 @@ app.post(
   }),
   createUser,
 );
-
+app.post(
+  '/signin',
+  celebrate({
+    body: Joi.object().keys({
+      email: Joi.string().required().email(),
+      password: Joi.string().required(),
+    }),
+  }),
+  login,
+);
 app.use(auth);
-
 app.use('/', usersRoutes);
 app.use('/', cardRoutes);
-app.all('*', () => {
+app.use('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
-
 app.use(errorLogger);
+app.use(errors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
@@ -100,8 +97,6 @@ app.use((err, req, res, next) => {
     });
   }
 });
-
-app.use(errors());
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
