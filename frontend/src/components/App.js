@@ -127,8 +127,11 @@ function App() {
 
   function handleUpdateUser({name, about}) {
     api.editUserInfo(name, about)
-      .then((data) => {
-        setCurrentUser(data);
+      .then(() => {
+        const updatedUser = { ...currentUser };
+        updatedUser.name = name;
+        updatedUser.about = about;
+        setCurrentUser({ ...updatedUser });
         closeAllPopups();
       })
       .catch((err) => {
