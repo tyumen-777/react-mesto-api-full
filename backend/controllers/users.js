@@ -5,6 +5,7 @@ const NotAuthError = require('../errors/not-auth-error');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const ConflictError = require('../errors/conflict-error');
+const isAuthorized = require('../helpers/isAuthorized');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -17,12 +18,17 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+  const token = req.headers.authorization;
+
+  if (!isAuthorized(token)) {
+    throw new BadRequestError('Доступ запрещен');
+  }
+  return User.findById(req.user._id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
       }
-      res.status(200).send(user);
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
