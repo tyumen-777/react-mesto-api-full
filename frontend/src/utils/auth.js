@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://tyumen-777.nomoredomains.club';
+import api from './api'
+export const BASE_URL = 'https://api.tyumen-777.nomoredomains.monster';
 
 //const checkResponse = (response) => response.ok ? response.json() : Promise.reject(`Ошибка: ${response.status}`)
 
@@ -32,6 +33,7 @@ export const authorize = ({email, password}) => {
         .then((data) => {
             if (data.token) {
                 localStorage.setItem('jwt', data.token);
+                api.updateHeaders();
                 return data.token
             }
         })
@@ -42,9 +44,9 @@ export const getContent = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `${token}`,
         },
     })
         .then(checkResponse)
         .then((data) => data)
-}
+};

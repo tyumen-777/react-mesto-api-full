@@ -85,14 +85,20 @@ class Api {
         }
         return res.json();
     }
+    updateHeaders() {
+      this._headers = {
+        'Content-Type': 'application.json',
+        'Authorization': `${localStorage.getItem('jwt')}`
+      }
+    }
 }
 
 
 const api = new Api({
     address: 'https://api.tyumen-777.nomoredomains.monster',
     headers: {
-        authorization: 'ed089852-ab21-42a0-b909-11eeabdb931a',
-        'Content-type': 'application/json'
+        'Authorization': `${localStorage.getItem('jwt')}`,
+        'Content-type': 'application/json',
     }
 })
 export default api
