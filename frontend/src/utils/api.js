@@ -87,7 +87,7 @@ class Api {
     }
     updateHeaders() {
       this._headers = {
-        'Content-Type': 'application.json',
+        'Content-Type': 'application/json',
         'Authorization': `${localStorage.getItem('jwt')}`
       }
     }
