@@ -17,7 +17,7 @@ const getUsers = (req, res, next) => {
     .catch(next);
 };
 
-const getUserById = (req, res, next) => {
+const getMe = (req, res, next) => {
   const token = req.headers.authorization;
 
   if (!isAuthorized(token)) {
@@ -29,6 +29,22 @@ const getUserById = (req, res, next) => {
         throw new NotFoundError('Нет пользователя с таким id');
       }
       res.status(200).send({ data: user });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        throw new BadRequestError(err.message);
+      }
+    })
+    .catch(next);
+};
+
+const getUserById = (req, res, next) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Нет пользователя с таким id');
+      }
+      res.status(200).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -107,6 +123,7 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
+  getMe,
   getUsers,
   getUserById,
   createUser,
