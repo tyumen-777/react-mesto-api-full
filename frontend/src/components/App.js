@@ -54,17 +54,6 @@ function App() {
       .then((newCard) => {
         setCards((cards) => cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard))
       })
-     // const changeLike = isLiked ? api.dislikeCard(card._id) : api.likeCard(card._id)
-     //   changeLike.then((newCard) => {
-     //     const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard);
-     //     setCards(newCards);
-     //   })
-
-    //     // //const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard)
-    //     // //setCards(newCards)
-
-    //
-    //   })
       .catch((err) => {
         console.log(err)
       })
@@ -84,6 +73,7 @@ function App() {
   React.useEffect(() => {
     api.getUserInfo()
       .then((user) => {
+        console.log(user.data)
         setCurrentUser(user.data)
       })
       .catch((err) => {
