@@ -49,19 +49,20 @@ function App() {
   }, [])
 
   function handleCardLike(card) {
-     const isLiked = card.likes.some((i) => i === currentUser._id);
-     const changeLike = isLiked ? api.dislikeCard(card._id) : api.likeCard(card._id)
-       changeLike.then((newCard) => {
-         const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard);
-         setCards(newCards);
-       })
-    // api.changeLikeCardStatus(card._id, isLiked)
-    //   .then((newCard) => {
-    //     // setCards((i) =>
-    //     // i.map((c) => (c._id === card._id ? newCard : c)))
+      const isLiked = card.likes.some((i) => i === currentUser._id);
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((cards) => cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard))
+      })
+     // const changeLike = isLiked ? api.dislikeCard(card._id) : api.likeCard(card._id)
+     //   changeLike.then((newCard) => {
+     //     const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard);
+     //     setCards(newCards);
+     //   })
+
     //     // //const newCards = cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard)
     //     // //setCards(newCards)
-    //      setCards((cards) => cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard))
+
     //
     //   })
       .catch((err) => {
