@@ -57,6 +57,10 @@ function App() {
       .catch((err) => {
         console.log(err)
       })
+    api.getUserInfo()
+      .then((user) => {
+        console.log(user.data)
+      })
   }
 
   function handleCardDelete(card) {
