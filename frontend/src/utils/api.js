@@ -17,7 +17,7 @@ class Api {
         }).then(this._checkResponse)
     } // Получаем информацию о пользователе с сервера
 
-    editUserInfo(name, about) {
+    editUserInfo({ name, about }) {
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
