@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="987c18f9-fd53-43ca-8ce5-6d6601860039" name="Default Changelist" comment="first commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +56,7 @@
       <updated>1626439853109</updated>
       <workItem from="1626439856121" duration="26000" />
       <workItem from="1626439890804" duration="7701000" />
-      <workItem from="1626620443877" duration="11253000" />
+      <workItem from="1626620443877" duration="12334000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1626440123482</created>
@@ -323,7 +324,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626773930829</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="first commit">
+      <created>1626774953201</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1626774953201</updated>
+    </task>
+    <task id="LOCAL-00040" summary="first commit">
+      <created>1626775183637</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1626775183637</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
