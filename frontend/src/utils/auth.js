@@ -34,7 +34,7 @@ export const authorize = ({email, password}) => {
             if (data.token) {
                 localStorage.setItem('jwt', data.token);
                 api.updateHeaders();
-                return data.token;
+                return data.token
             }
         })
 };
@@ -44,7 +44,7 @@ export const getContent = (token) => {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `${token}`,
         },
     })
         .then(checkResponse)
