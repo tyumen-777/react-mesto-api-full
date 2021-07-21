@@ -42,6 +42,7 @@ function App() {
     api.getInitialCards()
       .then(cardList => {
         setCards(cardList);
+        console.log(cardList)
       })
       .catch((err) => {
         console.log(err)
