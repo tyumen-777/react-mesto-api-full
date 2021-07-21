@@ -5,11 +5,9 @@ class Api {
 
     }
 
-    getInitialCards(token) {
+    getInitialCards() {
         return fetch(`${this._address}/cards`, {
-            headers: {
-              ...this._headers,
-            Authorization: `Bearer ${token}`},
+            headers: this._headers
         }).then(this._checkResponse)
     } // Получаем массив карточек с сервера
 
