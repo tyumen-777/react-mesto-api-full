@@ -1,7 +1,6 @@
 class Api {
     constructor({address, headers}) {
         this._address = address
-        //this._token = token
         this._headers = headers
     }
 
