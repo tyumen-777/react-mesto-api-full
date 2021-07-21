@@ -88,7 +88,7 @@ class Api {
     updateHeaders() {
       this._headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        'Authorization': `${localStorage.getItem('jwt')}`
       }
     }
 }
@@ -97,7 +97,7 @@ class Api {
 const api = new Api({
     address: 'https://api.tyumen-777.nomoredomains.monster',
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Authorization': `${localStorage.getItem('jwt')}`,
         'Content-type': 'application/json',
     }
 })
