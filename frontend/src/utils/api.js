@@ -1,5 +1,5 @@
 class Api {
-  constructor({address, headers}) {
+  constructor({address, headers, token}) {
     this._address = address
     this._headers = headers
 
@@ -101,6 +101,9 @@ const api = new Api({
   headers: {
     'Accept': 'application/json',
     'Content-type': 'application/json',
+  },
+  token: {
+    'Authorization': `${localStorage.getItem('jwt')}`
   }
 })
 
