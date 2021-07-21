@@ -12,11 +12,9 @@ class Api {
   } // Получаем массив карточек с сервера
 
   getUserInfo(token) {
+    console.log(token)
     return fetch(`${this._address}/users/me`, {
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${token}`
-      },
+      headers: this._headers
     }).then(this._checkResponse)
   } // Получаем информацию о пользователе с сервера
 
