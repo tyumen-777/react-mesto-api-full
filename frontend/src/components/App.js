@@ -42,12 +42,12 @@ function App() {
     api.getInitialCards()
       .then(cardList => {
         setCards(cardList);
-        console.log(cardList)
+
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [loggedIn])
 
   function handleCardLike(card) {
       const isLiked = card.likes.some((i) => i === currentUser._id);
@@ -84,7 +84,7 @@ function App() {
       .catch((err) => {
         console.log(err)
       });
-  }, [])
+  }, [loggedIn])
 
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
