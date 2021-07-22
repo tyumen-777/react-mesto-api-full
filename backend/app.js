@@ -83,11 +83,11 @@ app.use('*', () => {
 });
 app.use(errorLogger);
 app.use(errors());
-console.log(errors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
+  console.log(err);
   if (err.kind === 'ObjectId') {
     res.status(400).send({
       message: 'Неверно переданы данные',
