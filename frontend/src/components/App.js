@@ -52,7 +52,7 @@ function App() {
   }, [loggedIn])
 
   function handleCardLike(card) {
-      const isLiked = card.likes.some((i) => i === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((cards) => cards.map((currentCard) => currentCard._id === card._id ? newCard : currentCard))
@@ -133,10 +133,10 @@ function App() {
   function handleUpdateUser({name, about}) {
     api.editUserInfo(name, about)
       .then(() => {
-        const updatedUser = { ...currentUser };
+        const updatedUser = {...currentUser};
         updatedUser.name = name;
         updatedUser.about = about;
-        setCurrentUser({ ...updatedUser });
+        setCurrentUser({...updatedUser});
         closeAllPopups();
       })
       .catch((err) => {
@@ -219,10 +219,10 @@ function App() {
         }
 
         auth.getContent(data)
-            .then((res) => {
-                setEmail(res.data.email);
-            })
-            .catch(err => console.log(err))
+          .then((res) => {
+            setEmail(res.data.email);
+          })
+          .catch(err => console.log(err))
         setLoggedIn(true);
         api.getUserInfo().then((user) => setCurrentUser(user.data)
         )
@@ -259,14 +259,14 @@ function App() {
                 registration={registration}
               />
             </Route>
-            { currentUser._id && <ProtectedRoute
+            <ProtectedRoute
               exact path="/" component={Main} onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
               onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}
               onCardLike={handleCardLike} cards={cards}
               onCardDelete={handleCardDelete} loggedIn={loggedIn}>
               {/*<Main />*/}
-            </ProtectedRoute> }
+            </ProtectedRoute>
 
             <Route path="/">
               {loggedIn ? <Redirect to="/main"/> : <Redirect to="/sign-in"/>}
