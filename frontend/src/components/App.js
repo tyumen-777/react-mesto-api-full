@@ -39,14 +39,16 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getInitialCards()
-      .then(cardList => {
-        setCards(cardList);
+    if (loggedIn) {
+      api.getInitialCards()
+        .then(cardList => {
+          setCards(cardList);
 
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }, [loggedIn])
 
   function handleCardLike(card) {
