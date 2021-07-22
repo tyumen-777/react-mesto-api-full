@@ -28,7 +28,7 @@ const getMe = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Нет пользователя с таким id');
       }
-      res.status(200).send(user);
+      res.status(200).send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
