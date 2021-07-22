@@ -83,6 +83,7 @@ app.use('*', () => {
 });
 app.use(errorLogger);
 app.use(errors());
+console.log(errors());
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

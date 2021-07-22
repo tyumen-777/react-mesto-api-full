@@ -78,7 +78,7 @@ function App() {
   React.useEffect(() => {
     api.getUserInfo()
       .then((user) => {
-        setCurrentUser(user)
+        setCurrentUser(user.data)
         console.log(user.data)
       })
       .catch((err) => {
