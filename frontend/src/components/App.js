@@ -213,11 +213,12 @@ function App() {
         if (!data) {
           throw new Error('Произошла ошибка')
         }
-        // auth.getContent(data)
-        //     .then((res) => {
-        //         setEmail(res.data.email);
-        //     })
-        //     .catch(err => console.log(err))
+
+        auth.getContent(data)
+            .then((res) => {
+                setEmail(res.data.email);
+            })
+            .catch(err => console.log(err))
         setLoggedIn(true);
         api.getUserInfo().then((user) => setCurrentUser(user.data))
           .catch((err) => {
